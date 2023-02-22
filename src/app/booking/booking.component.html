@@ -1,0 +1,36 @@
+<form (ngSubmit)="submit()" [formGroup]="f">
+
+    <input type="text" placeholder="Nome" formControlName="name"> 
+    <input type="text" placeholder="Cognome" formControlName="last_name"> 
+    <input type="email" placeholder="Email" formControlName="email"> 
+    <input type="tel" placeholder="Telefono" formControlName="tel"> 
+
+    <div formGroupName="fulldate">
+        <input type="number" formControlName="day">
+        <input type="number" formControlName="month">
+        <select formControlName="time">
+            <option *ngFor="let t of times" [value]="t">{{t}}</option>
+        </select>
+    </div>
+
+    <button type="button" (click)="addExtra()">Aggiungi passeggero</button>
+    <div *ngFor="let e of extras.controls; let i = index" formArrayName="extras">
+        <ng-container [formGroupName]="i">
+            <label for="extra-name-{{i}}">
+                Nome
+            </label>
+            <input type="text" id="extra-name-{{i}}" formControlName="eName">
+            <label for="extra-email-{{i}}">
+                Email
+            </label>
+            <input type="text" id="extra-email-{{i}}" formControlName="eEmail">
+            <input type="text" id="extra-tel-{{i}}" formControlName="eName">
+            <label for="extra-tel-{{i}}">
+                Email
+            </label>
+            <input type="text" id="extra-tel-{{i}}" formControlName="eTel">
+        </ng-container>
+    </div>
+
+    <button type="submit">Prenota</button>
+</form>
